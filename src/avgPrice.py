@@ -40,12 +40,6 @@ fullURL = URL+"&frm=NVSHSRC"
 
 html = get_html(fullURL)
 soup = BeautifulSoup(html, 'html.parser')
-
-#find("div",{"class": "product_list_area"}).
-#print(soup) / #_search_list > div.search_list.basis > ul > li > div.info > a
-#_search_list > div.search_list.basis > ul > li > div.info > span.price > em > span.num._price_reload
-# #_search_list > div.search_list.basis > ul > li > div.info > span.price > em > span
-#_search_list > div.search_list.basis > ul > li > div.info > span.price > em > span
 name = "#" + "_search_list > div.search_list.basis > ul > li > div.info > a"
 price = "#" + "_search_list > div.search_list.basis > ul > li > div.info > span.price > em > span.num"
 
@@ -53,5 +47,11 @@ price = "#" + "_search_list > div.search_list.basis > ul > li > div.info > span.
 pN = soup.select(name)
 pP = soup.select(price)
 
+product = [[0 for cols in range(2)] for rows in range(len(pP))]
+
+
+
 for i in range(len(pP)):
-    print(pN[i].text , pP[i].text + "won")
+    product[i][0] = pN[i].text.strip()
+    product[i][1] = int(pP[i].text.replace(",",""))
+    print(product[i][0] , product[i][1])
