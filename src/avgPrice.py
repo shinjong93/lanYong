@@ -16,12 +16,27 @@ URL = "https://search.shopping.naver.com/search/all.nhn?query="
      # "%20%22gtx%201070" \
     #  "%22%20-ti" \
      # "&frm=NVSHSRC"
-company = str(input("company?"))
-model = str(input("model?"))
-match = str(input("match?"))
-noSearch = str(input("not search?"))
+company =[]
+while(True):
+    tmp = str(input("company? enter to save : "))
+    tmp = tmp + str(input("model? ctcl+D to save :"))
+    if tmp == "":
+        break
+    URL = URL + tmp + "%20"
 
-fullURL = URL + company +"%20"+model+"%22%20-"+noSearch+"&frm=NVSHSRC"
+while(True):
+    tmp = str(input("match? enter to save : "))
+    if tmp == "":
+        break
+    URL = URL + "%22" + tmp + "%22%20"
+
+while(True):
+    tmp = str(input("not search? enter to save : "))
+    if tmp == "":
+        break
+    URL = URL + "-" +tmp + "%20"
+
+fullURL = URL+"&frm=NVSHSRC"
 
 html = get_html(fullURL)
 soup = BeautifulSoup(html, 'html.parser')
